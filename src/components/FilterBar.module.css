@@ -1,4 +1,6 @@
 .bar {
+  position: relative;
+  z-index: 30;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -21,6 +23,7 @@
 
 .menuShell {
   position: relative;
+  z-index: 1;
 }
 
 .trigger {
@@ -49,8 +52,10 @@
   position: absolute;
   top: calc(100% + 0.55rem);
   left: 0;
-  z-index: 20;
+  z-index: 60;
   min-width: 220px;
+  max-height: min(320px, calc(100vh - 180px));
+  overflow-y: auto;
   background: #fffdf7;
   border-radius: 18px;
   border: 1px solid rgba(15, 23, 42, 0.1);

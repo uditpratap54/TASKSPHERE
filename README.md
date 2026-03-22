@@ -4,7 +4,7 @@ TaskSphere is a React + TypeScript project tracker UI that keeps one shared task
 
 ## Live Link
 
-Add your deployed URL here after publishing to Vercel or Netlify.
+https://tasksphere-9ze4.onrender.com
 
 ## Setup
 
