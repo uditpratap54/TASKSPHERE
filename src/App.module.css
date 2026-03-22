@@ -1,0 +1,131 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(247, 127, 0, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(23, 104, 172, 0.16), transparent 22%),
+    linear-gradient(180deg, #fefcf7 0%, #f4efe6 100%);
+  color: #14213d;
+}
+
+.shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 2.5rem;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2rem;
+  align-items: flex-end;
+  margin-bottom: 1.3rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(20, 33, 61, 0.08);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 0.95;
+  margin: 0.7rem 0 0.8rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  max-width: 720px;
+  margin: 0;
+  color: #526178;
+  font-size: 1rem;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.3rem 0 1rem;
+}
+
+.presenceBar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.avatars {
+  display: inline-flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 3px solid #fffaf1;
+  color: white;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  margin-left: -10px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.label strong {
+  font-size: 0.98rem;
+}
+
+.label span {
+  color: #526178;
+  font-size: 0.88rem;
+}
+
+.viewPort {
+  margin-top: 1rem;
+  position: relative;
+}
+
+.summaryPill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.85rem 1rem;
+  border-radius: 22px;
+  background: rgba(20, 33, 61, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.summaryPill strong {
+  font-size: 1.1rem;
+}
+
+.summaryPill span {
+  color: #526178;
+  font-size: 0.9rem;
+}
