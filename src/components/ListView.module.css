@@ -100,3 +100,38 @@
   width: 28px;
   height: 28px;
 }
+
+@media (min-width: 1280px) {
+  .frame {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .header {
+    grid-template-columns: minmax(320px, 2.1fr) 0.85fr 1fr 0.95fr 1.05fr;
+    padding-inline: 1.4rem;
+  }
+
+  .row {
+    grid-template-columns: minmax(320px, 2.1fr) 0.85fr 1fr 0.95fr 1.05fr;
+    padding-inline: 1.4rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .frame {
+    overflow-x: auto;
+  }
+
+  .header,
+  .inner {
+    min-width: 760px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header,
+  .row {
+    padding-inline: 0.9rem;
+  }
+}

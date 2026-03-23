@@ -16,9 +16,9 @@
 .hero {
   display: flex;
   justify-content: space-between;
-  gap: 1.2rem;
-  align-items: flex-end;
-  margin-bottom: 1.3rem;
+  gap: 2.25rem;
+  align-items: center;
+  margin-bottom: 1.1rem;
 }
 
 .eyebrow {
@@ -40,10 +40,11 @@
   margin: 0.7rem 0 0.8rem;
   font-weight: 700;
   letter-spacing: -0.04em;
+  max-width: 15ch;
 }
 
 .subtitle {
-  max-width: 720px;
+  max-width: 62ch;
   margin: 0;
   color: #526178;
   font-size: 1rem;
@@ -55,7 +56,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin: 1.3rem 0 1rem;
+  margin: 1rem 0 0.85rem;
 }
 
 .presenceBar {
@@ -107,7 +108,7 @@
 }
 
 .viewPort {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   position: relative;
 }
 
@@ -128,4 +129,83 @@
 .summaryPill span {
   color: #526178;
   font-size: 0.9rem;
+}
+
+@media (min-width: 1280px) {
+  .shell {
+    max-width: 1520px;
+    padding-inline: 2rem;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) auto;
+    align-items: end;
+  }
+
+  .topBar {
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+  }
+
+  .summaryPill {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topBar {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .shell {
+    padding: 1.25rem 0.9rem 1.75rem;
+  }
+
+  .hero {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .topBar {
+    gap: 0.85rem;
+  }
+
+  .presenceBar,
+  .summaryPill {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .shell {
+    padding-inline: 0.75rem;
+  }
+
+  .title {
+    line-height: 1.02;
+  }
+
+  .presenceBar {
+    flex-wrap: wrap;
+    padding: 0.8rem 0.85rem;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 0.68rem;
+  }
 }

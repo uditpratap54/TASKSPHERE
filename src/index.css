@@ -21,10 +21,6 @@ body,
   min-height: 100%;
 }
 
-body {
-  min-width: 768px;
-}
-
 button,
 input,
 select {

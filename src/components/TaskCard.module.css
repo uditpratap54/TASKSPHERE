@@ -107,3 +107,20 @@
 .overflow {
   background: #14213d;
 }
+
+@media (max-width: 480px) {
+  .card {
+    padding: 0.9rem;
+  }
+
+  .topRow,
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .presenceAnchor,
+  .stack {
+    right: 14px;
+  }
+}

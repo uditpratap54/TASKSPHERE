@@ -114,3 +114,25 @@
   place-items: center;
   text-align: center;
 }
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    grid-template-columns: 150px minmax(0, 1fr);
+    min-height: 520px;
+  }
+
+  .nameCell {
+    padding: 0 0.75rem;
+    font-size: 0.92rem;
+  }
+
+  .presenceAnchor {
+    right: 8px;
+  }
+}

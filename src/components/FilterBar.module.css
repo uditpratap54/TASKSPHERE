@@ -111,3 +111,43 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  .bar {
+    align-items: stretch;
+  }
+
+  .group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .bar {
+    padding: 0.9rem;
+    border-radius: 20px;
+  }
+
+  .group,
+  .menuShell,
+  .dateInputs {
+    width: 100%;
+  }
+
+  .trigger,
+  .dateField,
+  .clearButton {
+    width: 100%;
+  }
+
+  .menu {
+    left: 0;
+    right: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .dateInputs {
+    flex-direction: column;
+  }
+}
