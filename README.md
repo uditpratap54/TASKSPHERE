@@ -1,67 +1,143 @@
 # TaskSphere
 
-TaskSphere is a React + TypeScript project tracker UI that keeps one shared task dataset in sync across Kanban, List, and Timeline views. I built it without drag-and-drop, virtualization, or UI component libraries because the goal of this task felt more like proving frontend fundamentals than assembling packages.
+TaskSphere is a responsive multi-view project tracker built with React, TypeScript, and Vite. It presents the same shared task dataset in three coordinated views: Kanban, List, and Timeline. The UI is designed to stay usable across phone, tablet, laptop, and large desktop screens while keeping interactions lightweight and custom.
 
-## Live Link
+## Live Demo
 
 https://tasksphere-9ze4.onrender.com
 
-## Setup
+## UI Snapshot
+
+The current interface includes:
+
+- a large editorial-style hero section
+- responsive view switching between Kanban, List, and Timeline
+- pill-based filter controls for status, priority, assignee, and due date range
+- a simulated collaboration strip with active viewers and inline presence markers
+- desktop-specific spacing polish and mobile-friendly reflow behavior
+
+## Core Features
+
+- Three synchronized views powered by one in-memory task source
+- Custom pointer-based drag and drop in the Kanban board
+- Virtualized List view for large task volumes
+- Month timeline with current-day marker and task bars
+- URL-synced view, sort, and filter state
+- Simulated live collaboration presence that moves across tasks
+- Responsive layout behavior from mobile to large desktop
+- Empty-state handling and due-date edge cases
+
+## Views
+
+### Kanban
+
+- Four workflow columns: To Do, In Progress, In Review, Done
+- Scrollable columns with draggable task cards
+- Placeholder + drag ghost interaction without external drag libraries
+
+### List
+
+- Sortable columns for title, priority, and due date
+- Fixed-row virtualization for smooth rendering with 500+ items
+- Horizontal safety on smaller widths and cleaner centering on large screens
+
+### Timeline
+
+- Month-based horizontal schedule view
+- Current-day indicator
+- Single-day markers for tasks without a start date
+
+## Filters And State
+
+- Status filter
+- Priority filter
+- Assignee filter
+- Due date range filter
+- URL query hydration and browser back/forward support
+
+State is managed with React Context and `useReducer`, which keeps updates explicit while sharing the same source of truth across all three views.
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- CSS Modules
+- React Context + `useReducer`
+
+## Project Structure
+
+```text
+src/
+  components/      UI views and shared interface pieces
+  data/            deterministic task generation
+  state/           context, reducer, and shared board logic
+  utils/           date and formatting helpers
+  constants.ts     labels, defaults, and view metadata
+```
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-For a production build:
+Create a production build:
 
 ```bash
 npm run build
+```
+
+Preview the production build locally:
+
+```bash
 npm run preview
 ```
 
-## Tech Choices
+## Data Model
 
-- React 19 + TypeScript + Vite
-- CSS Modules for custom component styling
-- React Context + `useReducer` for state management
+The seeded dataset is generated in `src/data/generateTasks.ts`.
 
-## Why Context + useReducer
+Current seed setup:
 
-I chose React Context with `useReducer` because the app has one shared task dataset, a small set of predictable write actions, and several read-heavy views that all depend on the same source of truth. This kept the architecture lightweight while still making task updates, sort changes, filter updates, URL hydration, and view switching explicit through reducer actions. For this assignment, that tradeoff felt cleaner than introducing a separate state library for state that already fits naturally inside the React tree.
-
-## Features
-
-- Three synchronized views over the same in-memory task data
-- Kanban board with independent column scroll areas and custom pointer-based drag-and-drop
-- List view with custom virtual scrolling for 500+ generated rows
-- Timeline view with month-based bars, a current-day marker, and single-day markers for tasks without a start date
-- URL-synced filters for status, priority, assignee, and due date range
-- Simulated live collaboration indicators with animated avatar movement
-- Edge-case handling for empty states, overdue dates, and due-today labels
-
-## Seed Data
-
-The generator in `src/data/generateTasks.ts` creates 560 deterministic tasks using:
-
+- 560 deterministic tasks
 - 6 assignees
-- 4 statuses
 - 4 priorities
-- randomized date windows
-- overdue items
+- 4 workflow statuses
+- mixed date ranges
+- overdue tasks
 - tasks with missing start dates
 
-## Virtual Scrolling Approach
+## Interaction Notes
 
-The list view uses a fixed row height and computes the visible window from the scroll container's `scrollTop`. It renders only the rows inside the current viewport plus a buffer of five rows above and below. The full scroll height is preserved with an inner container set to the total list height, while each visible row is absolutely positioned using its virtual index. I kept it intentionally straightforward so the math is easy to follow and debug, and it still stays smooth with 500+ tasks.
+### Why custom drag and drop?
 
-Reference: `src/components/ListView.tsx`
+The Kanban interaction uses native pointer events instead of a drag-and-drop package. This keeps the behavior easy to reason about and shows the underlying implementation more clearly. A dragged card is measured, replaced by a placeholder, and rendered as a floating ghost until drop.
 
-## Drag-and-Drop Approach
+### Why virtual scrolling?
 
-The Kanban view uses native pointer events instead of a drag library. On pointer down, I capture the card's bounding box and render a floating drag ghost in a fixed layer. The original card is replaced by a placeholder with the same measured height so the column does not collapse. During pointer movement, the current cursor position is compared against column bounds to determine the active drop zone. If the pointer is released outside a valid column, the drag ghost animates back to its original rectangle for a snap-back effect.
+The List view uses fixed-height virtualization so the UI stays smooth with a large seeded dataset. Only the visible rows and a small buffer are rendered, while the full scroll height is preserved.
 
-Reference: `src/components/KanbanView.tsx`
+### Why Context + useReducer?
+
+This app has one shared board state, a small set of predictable writes, and multiple views that need to stay in sync. Context with `useReducer` was enough to keep the architecture simple without adding an external state library.
+
+## Responsive Design Summary
+
+The UI has been tuned for:
+
+- mobile stacking and full-width controls
+- tablet reflow for filters and board content
+- controlled horizontal overflow where dense data needs it
+- large-screen balancing for hero content, summary spacing, and board/list proportions
 
 ## Lighthouse
 
@@ -69,16 +145,13 @@ Desktop Lighthouse score captured locally against the production build: `97` per
 
 ![Lighthouse desktop report](./lighthouse-desktop.png)
 
-Additional artifacts:
+Artifacts:
 
 - `lighthouse-report.report.html`
 - `lighthouse-report.report.json`
 
-## Explanation Field Draft
+## Challenges And Tradeoffs
 
-The hardest part of this UI was making the Kanban drag interaction feel custom while keeping the layout stable underneath it. I handled that by separating the dragged card from the board as soon as the gesture starts. The dragged card becomes a fixed-position ghost that follows the pointer, while the original slot is replaced with a placeholder that matches the measured card height. That kept the source column from collapsing, so nearby cards did not jump around while dragging.
+The most sensitive part of the UI was keeping the Kanban drag interaction stable while also supporting responsive layout changes. The placeholder/ghost approach prevents column collapse and avoids card jumping during drag. On the layout side, the larger challenge was making the same interface feel balanced on both small screens and wide desktop monitors without changing the core interaction model between breakpoints.
 
-The placeholder is created from the dragged card's actual bounding rectangle at drag start instead of from an estimated constant height. That mattered because titles vary in length and some cards are naturally taller than others. Measuring the real height prevented subtle layout shifts and made the interaction feel much more reliable.
-
-With more time, I would refactor the collaboration layer into a slightly more dedicated positioning system that reacts to resize and scroll changes more aggressively, so presence indicators stay perfectly anchored during every layout transition and not just the main interaction paths already covered here.
-# TASKSPHERE
+If I extended this further, I would improve presence positioning so it reacts even more precisely to scroll and resize events, and I would add richer board operations such as task detail panels or inline editing.
